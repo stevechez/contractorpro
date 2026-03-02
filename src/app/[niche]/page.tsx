@@ -7,6 +7,7 @@ import { Services } from "@/components/sections/Services";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Pricing } from "@/components/sections/Pricing";
 import { CTA } from "@/components/sections/CTA";
+import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 
 export function generateStaticParams() {
   return Object.keys(nicheData).map((niche) => ({
@@ -35,7 +36,7 @@ export default async function NicheLandingPage({
       <Hero 
         title={currentNiche.heroTitle} 
         subtitle={currentNiche.heroSubtitle} 
-        bgImage={currentNiche.heroImage} 
+        // bgImage={currentNiche.heroImage} 
       />
       
       <TrustedBy label={currentNiche.trustedText} />
@@ -44,6 +45,7 @@ export default async function NicheLandingPage({
       <Services services={currentNiche.services || []} />
       
       <Testimonials />
+      <ProcessTimeline />
       <Pricing />
       <CTA />
     </main>

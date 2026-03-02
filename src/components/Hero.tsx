@@ -38,14 +38,16 @@ export default function Hero({
       <div className="absolute inset-0 z-0 opacity-40 mix-blend-luminosity">
         <Image
           src={bgImage}
-          alt="Premium construction and contracting"
+          alt={title}
           fill
           priority
-          className="object-cover object-top mask-image-gradient"
-          style={{ maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)' }}
+          className="object-cover object-center brightness-[1.3] contrast-[1.1]"
+    style={{ 
+      maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)', 
+      WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)' 
+    }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/80 to-slate-950" />
-      </div>
+<div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/50 to-slate-950" />      </div>
 
       <motion.div
         initial="hidden"

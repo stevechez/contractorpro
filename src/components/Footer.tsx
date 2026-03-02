@@ -73,7 +73,7 @@ export default function Footer() {
           </div>
 
           {/* Company & Legal */}
-          <div>
+          <div> {/* <-- THIS DIV WAS MISSING */}
             <h4 className="text-white font-bold mb-6 tracking-tight">Company</h4>
             <ul className="space-y-4">
               <li>
@@ -83,13 +83,12 @@ export default function Footer() {
                 <Link href="/terms" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link>
               </li>
               <li>
-                <a href="mailto:hello@example.com" className="text-sm text-slate-400 hover:text-white transition-colors">
+                <Link href="/contact" className="text-sm text-slate-400 hover:text-white transition-colors">
                   Contact Support
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
-
         </div>
 
         {/* Bottom Bar: Status, Copyright, Socials */}

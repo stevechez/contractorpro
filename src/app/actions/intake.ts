@@ -48,9 +48,9 @@ export async function submitIntakeForm(formData: FormData) {
   // 5. Send the Email Notification via Resend
   try {
     await resend.emails.send({
-      from: "ContractorPro Leads <onboarding@resend.dev>",
+      from: "ContractorPro Leads <onboarding@sitealerts.online>",
       // IMPORTANT: Put YOUR actual email address here to receive the alerts
-      to: "steve@example.com", 
+      to: "stevechez@gmail.com", 
       subject: `🚨 New $2.5k Lead: ${data.company}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">

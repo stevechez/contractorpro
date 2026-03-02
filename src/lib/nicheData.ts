@@ -11,7 +11,7 @@ export const nicheData = {
   "general-contractor": {
     heroTitle: "Premium Websites for General Contractors",
     heroSubtitle: "Launch a conversion-optimized, professional website in 48 hours. Built for contractors who want more calls — not complexity.",
-    heroImage: "/hero-bg.jpg",
+    // heroImage: "/hero-bg.jpg",
     trustedText: "TRUSTED BY ELITE CONTRACTORS ACROSS NORTH AMERICA",
     services: [
       { title: "Custom Home Builds", description: "From architectural planning to the final coat of paint, we build dream homes from the ground up.", iconName: "home" },

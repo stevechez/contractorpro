@@ -7,9 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Services", href: "#services" },
-  { name: "Reviews", href: "#reviews" },
-  { name: "Pricing", href: "#pricing" },
+  { name: "Manifesto", href: "/about" },
+  { name: "Services", href: "/#services" },
+  { name: "Reviews", href: "/#reviews" },
+  { name: "Pricing", href: "/#pricing" },
 ];
 
 export default function Navbar() {
@@ -49,8 +50,7 @@ export default function Navbar() {
               href={link.href}
               onMouseEnter={() => setHoveredPath(link.name)}
               onMouseLeave={() => setHoveredPath(null)}
-              className="relative px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
-            >
+className="relative px-6 py-3 text-base font-normal text-slate-300 transition-all hover:text-white hover:scale-105 active:scale-95"            >
               {link.name}
               {/* The Sliding Hover Pill */}
               {hoveredPath === link.name && (
@@ -113,8 +113,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-2xl font-bold tracking-tight text-slate-300 hover:text-white transition-colors block"
-                  >
+className="block w-full px-8 py-6 text-xl font-bold text-slate-200 border-b border-white/5 hover:bg-white/5 transition-colors"                  >
                     {link.name}
                   </Link>
                 </motion.div>

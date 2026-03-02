@@ -1,0 +1,33 @@
+{
+
+  "metadata": {
+    "title": "Elite Hardscapes | Premium Paving in Aptos",
+    "description": "30 years of engineering excellence in custom stone pavers, retaining walls, and outdoor living spaces.",
+    "keywords": "Hardscaping Aptos, Stone Pavers Santa Cruz, Landscape Engineering",
+    "ogImage": "/og-image.jpg",
+    "favicon": "/favicon.ico"
+  },
+  "services": [
+    {
+      "id": "remodeling",
+      "active": true,
+      "title": "Kitchen & Bath Remodeling",
+      "description": "High-end transitions with a beach-feel aesthetic and precision engineering.",
+      "icon": "Home"
+    },
+    {
+      "id": "drywall",
+      "active": false,
+      "title": "Drywall & Plaster",
+      "description": "Flawless finishes and structural repairs for residential properties.",
+      "icon": "Layers"
+    },
+    {
+      "id": "hardscaping",
+      "active": true,
+      "title": "Custom Hardscaping",
+      "description": "Stone pavers, retaining walls, and low-water outdoor living spaces.",
+      "icon": "Mountain"
+    }
+  ]
+}
