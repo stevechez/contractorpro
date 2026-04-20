@@ -1,115 +1,71 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { ArrowRight, PlayCircle } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 
-interface HeroProps {
-	title?: string;
-	subtitle?: string;
-	bgImage?: string;
-}
-
-export default function Hero({ title, subtitle, bgImage }: HeroProps) {
-	// Explicitly typing as Variants fixes the 'ease' array inference error
-	const containerVariants: Variants = {
-		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-			transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-		},
-	};
-
+export default function Hero() {
 	const itemVariants: Variants = {
-		hidden: { opacity: 0, y: 20 },
+		hidden: { opacity: 0, y: 30 },
 		visible: {
 			opacity: 1,
 			y: 0,
-			transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+			transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
 		},
 	};
 
 	return (
-		<section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden bg-zinc-950">
-			{/* Ultra-premium background glows */}
-			<div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-20 pointer-events-none">
-				<div className="absolute inset-0 bg-gradient-to-b from-orange-500/30 to-transparent blur-[100px] rounded-full mix-blend-screen" />
-			</div>
+		<section className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-6 bg-zinc-950 overflow-hidden">
+			{/* High-end industrial glow */}
+			<div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-orange-500/10 blur-[140px] rounded-full pointer-events-none" />
 
 			<motion.div
-				className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center text-center"
-				variants={containerVariants}
 				initial="hidden"
 				animate="visible"
+				transition={{ staggerChildren: 0.1 }}
+				className="relative z-10 max-w-6xl mx-auto text-center"
 			>
-				{/* Subtle top badge */}
-				<motion.div variants={itemVariants} className="mb-8">
-					<span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium text-zinc-300">
-						<span className="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse"></span>
-						BuildRail Sites is now live
+				<motion.div variants={itemVariants} className="mb-6">
+					<span className="px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-bold uppercase tracking-[0.2em] text-orange-500 shadow-2xl">
+						For Serious Contractors Only
 					</span>
 				</motion.div>
 
-				{/* Main Headline */}
 				<motion.h1
 					variants={itemVariants}
-					className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white mb-8 leading-[1.05]"
+					className="text-5xl md:text-8xl font-black tracking-tight leading-[0.9] text-white mb-8 text-balance"
 				>
-					Stop Losing $10K+ Jobs to <br className="hidden md:block" />
-					<span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-						Contractors With Better Websites
-					</span>
+					YOU LOSE THE JOB <br />
+					<span className="text-zinc-600">BEFORE YOU EVEN QUOTE IT</span>
 				</motion.h1>
 
-				{/* Subheadline */}
 				<motion.p
 					variants={itemVariants}
-					className="text-lg md:text-2xl text-zinc-400 max-w-3xl mb-12 leading-relaxed"
+					className="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto mb-12 leading-relaxed"
 				>
-					We build your entire contractor website in 48 hours—so you look
-					premium, rank on Google, and win higher-paying clients.
+					High-end homeowners judge your price in 5 seconds. If your website
+					looks &ldquo;budget,&rdquo; they&quot;ll never pay your premium rate.
+					We rebuild your entire digital presence in 48 hours.
 				</motion.p>
 
-				{/* CTAs */}
 				<motion.div
 					variants={itemVariants}
-					className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16"
+					className="flex flex-col items-center gap-6"
 				>
-					<button className="group h-14 px-8 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl transition-all shadow-[0_0_40px_rgba(249,115,22,0.2)] hover:shadow-[0_0_60px_rgba(249,115,22,0.4)] flex items-center justify-center gap-2 text-lg">
-						Get My Site Built in 48 Hours
+					<button className="group relative h-16 px-10 bg-orange-500 hover:bg-orange-600 text-white font-black rounded-2xl transition-all shadow-[0_0_50px_rgba(249,115,22,0.4)] text-xl flex items-center gap-3">
+						UPGRADE MY PERCEPTION IN 48 HOURS
 						<ArrowRight
-							size={20}
+							size={24}
 							className="group-hover:translate-x-1 transition-transform"
 						/>
 					</button>
 
-					<button className="h-14 px-8 bg-zinc-900 hover:bg-zinc-800 text-white font-medium rounded-xl border border-zinc-800 transition-all flex items-center justify-center gap-2 text-lg">
-						<PlayCircle size={20} className="text-zinc-400" />
-						View Example Sites
-					</button>
-				</motion.div>
-
-				{/* Trust Bar */}
-				<motion.div
-					variants={itemVariants}
-					className="flex flex-col items-center gap-4"
-				>
-					<p className="text-xs font-semibold text-zinc-500 uppercase tracking-[0.2em]">
-						Built specifically for
-					</p>
-					<div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm md:text-base font-medium text-zinc-400">
-						<span>Roofers</span>
-						<span className="w-1 h-1 rounded-full bg-zinc-700"></span>
-						<span>Remodelers</span>
-						<span className="w-1 h-1 rounded-full bg-zinc-700"></span>
-						<span>HVAC</span>
-						<span className="w-1 h-1 rounded-full bg-zinc-700"></span>
-						<span>General Contractors</span>
+					<div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-bold text-zinc-500 uppercase tracking-widest">
+						<span>No Meetings</span>
+						<span>No Tech Work</span>
+						<span>No Delays</span>
 					</div>
 				</motion.div>
 			</motion.div>
-
-			{/* Bottom fade out to next section */}
-			<div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent pointer-events-none"></div>
 		</section>
 	);
 }

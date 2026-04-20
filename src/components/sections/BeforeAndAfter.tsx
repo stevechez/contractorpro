@@ -1,10 +1,15 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { XCircle, CheckCircle2, TrendingUp, AlertCircle } from 'lucide-react';
+import {
+	XCircle,
+	CheckCircle2,
+	ArrowRightLeft,
+	TrendingUp,
+	AlertTriangle,
+} from 'lucide-react';
 
 export default function BeforeAfterSection() {
-	// Explicitly typing as Variants fixes the 'ease' array inference error
 	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -25,112 +30,136 @@ export default function BeforeAfterSection() {
 	return (
 		<section className="relative py-32 px-6 bg-zinc-950 overflow-hidden">
 			<motion.div
-				className="relative z-10 max-w-6xl mx-auto"
+				className="relative z-10 max-w-7xl mx-auto"
 				initial="hidden"
 				whileInView="visible"
 				viewport={{ once: true, margin: '-100px' }}
 				variants={containerVariants}
 			>
-				{/* Headline */}
-				<motion.div variants={itemVariants} className="text-center mb-20">
-					<h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-						Look Like You Charge More—
-						<span className="text-orange-500">So You Can</span>
+				{/* Elite Headline Framing */}
+				<motion.div variants={itemVariants} className="max-w-4xl mb-24">
+					<h2 className="text-5xl md:text-7xl font-black tracking-tight text-white mb-8 uppercase leading-[0.9]">
+						The Difference Between <br />
+						<span className="text-orange-500">
+							&ldquo;Getting Quotes&rdquo;
+						</span>{' '}
+						and <br />
+						<span className="text-zinc-700 font-outline">Winning Jobs</span>
 					</h2>
-					<p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-						We don&quot;t just change your design; we change how much a
-						homeowner thinks your time is worth.
+					<p className="text-xl md:text-2xl text-zinc-400 font-medium">
+						We don&quot;t just change your design; we change the
+						homeowner&quot;s psychological ceiling on what they are willing to
+						pay you.
 					</p>
 				</motion.div>
 
-				<div className="grid md:grid-cols-2 gap-8 lg:gap-12 mb-16">
-					{/* THE "BEFORE" CARD */}
+				<div className="grid lg:grid-cols-12 gap-8 items-center">
+					{/* THE "LOW-LEVERAGE" STATE (Losing Money) */}
 					<motion.div
 						variants={itemVariants}
-						className="group relative rounded-[2.5rem] overflow-hidden border border-zinc-900 bg-zinc-900/20 transition-all duration-500 hover:border-zinc-800"
+						className="lg:col-span-5 group relative rounded-3xl overflow-hidden border border-zinc-900 bg-zinc-900/10 transition-all duration-500 opacity-60 hover:opacity-100"
 					>
-						<div className="absolute top-6 left-6 z-20">
-							<div className="flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full backdrop-blur-xl">
-								<XCircle size={18} className="text-red-500" />
-								<span className="text-sm font-bold text-red-500 uppercase tracking-wider">
-									Generic & Outdated
-								</span>
+						<div className="p-6 border-b border-zinc-900 flex justify-between items-center bg-zinc-950/50">
+							<span className="text-xs font-bold uppercase tracking-widest text-zinc-500">
+								Current Perception
+							</span>
+							<div className="px-2 py-1 rounded bg-red-500/10 text-red-500 text-[10px] font-black uppercase">
+								Low Authority
 							</div>
 						</div>
 
-						{/* Image Placeholder */}
-						<div className="aspect-[4/3] bg-zinc-900 flex flex-col items-center justify-center p-12 transition-transform duration-700 group-hover:scale-105">
+						<div className="aspect-video bg-zinc-900/50 flex flex-col items-center justify-center p-12 grayscale opacity-50">
 							<div className="w-full h-full border-2 border-dashed border-zinc-800 rounded-xl flex flex-col items-center justify-center text-zinc-700">
-								<AlertCircle size={48} className="mb-4 opacity-20" />
-								<p className="text-sm font-mono tracking-tighter opacity-40 uppercase">
+								<AlertTriangle size={48} className="mb-4" />
+								<p className="text-xs font-mono uppercase tracking-tighter">
 									Typical &ldquo;DIY&rdquo; Template
 								</p>
 							</div>
 						</div>
 
-						<div className="p-8 border-t border-zinc-900">
-							<p className="text-zinc-500 font-medium mb-1">
-								Customer Perception:
-							</p>
-							<p className="text-xl text-zinc-400">
-								&ldquo;They&rsquo;re probably the cheapest option.&rdquo;
-							</p>
-						</div>
-					</motion.div>
-
-					{/* THE "AFTER" CARD */}
-					<motion.div
-						variants={itemVariants}
-						className="group relative rounded-[2.5rem] overflow-hidden border-2 border-orange-500/30 bg-zinc-900/40 transition-all duration-500 shadow-[0_0_50px_rgba(249,115,22,0.1)] hover:border-orange-500/60"
-					>
-						<div className="absolute top-6 left-6 z-20">
-							<div className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full backdrop-blur-xl">
-								<CheckCircle2 size={18} className="text-emerald-500" />
-								<span className="text-sm font-bold text-emerald-500 uppercase tracking-wider">
-									BuildRail Premium
+						<div className="p-8 space-y-4">
+							<div className="flex items-start gap-3">
+								<XCircle size={18} className="text-red-900 mt-1" />
+								<p className="text-zinc-400 font-medium italic leading-snug">
+									&ldquo;They&quot;re probably the cheapest option. I&ldquo;ll
+									get 3 more quotes to drive them down.&rdquo;
+								</p>
+							</div>
+							<div className="pt-4 border-t border-zinc-900 flex justify-between items-center">
+								<span className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
+									Average Project Value
+								</span>
+								<span className="text-xl font-bold text-zinc-500">
+									$5,000 - $12,000
 								</span>
 							</div>
 						</div>
+					</motion.div>
 
-						<div className="absolute top-6 right-6 z-20">
-							<div className="flex items-center gap-2 px-3 py-1 bg-orange-500 text-white rounded-lg text-xs font-black uppercase tracking-tighter shadow-lg">
-								<TrendingUp size={14} /> +40% Pricing Power
+					{/* THE TRANSITION ICON */}
+					<div className="hidden lg:flex lg:col-span-2 justify-center">
+						<div className="w-16 h-16 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 shadow-[0_0_30px_rgba(249,115,22,0.2)]">
+							<ArrowRightLeft size={32} strokeWidth={1.5} />
+						</div>
+					</div>
+
+					{/* THE "HIGH-LEVERAGE" STATE (Elite Pricing) */}
+					<motion.div
+						variants={itemVariants}
+						className="lg:col-span-5 group relative rounded-3xl overflow-hidden border-2 border-orange-500/40 bg-zinc-900/40 shadow-[0_0_60px_rgba(249,115,22,0.15)]"
+					>
+						<div className="p-6 border-b border-zinc-800 flex justify-between items-center bg-zinc-900/50">
+							<span className="text-xs font-bold uppercase tracking-widest text-orange-500">
+								Premium Positioning
+							</span>
+							<div className="px-2 py-1 rounded bg-orange-500 text-white text-[10px] font-black uppercase shadow-lg shadow-orange-500/20">
+								+40% Pricing Power
 							</div>
 						</div>
 
-						{/* Image Placeholder */}
-						<div className="aspect-[4/3] bg-zinc-800 flex items-center justify-center p-12 transition-transform duration-700 group-hover:scale-105">
-							<div className="w-full h-full bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col items-center justify-center text-orange-500/20">
-								<div className="w-24 h-24 rounded-full border-4 border-orange-500/20 flex items-center justify-center animate-pulse">
-									<TrendingUp size={48} className="text-orange-500" />
-								</div>
+						<div className="aspect-video bg-zinc-800 flex items-center justify-center p-8 transition-transform duration-700 group-hover:scale-[1.02]">
+							{/* This is where a high-quality mockup of your build goes */}
+							<div className="w-full h-full bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl flex flex-col items-center justify-center relative overflow-hidden">
+								<div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent" />
+								<TrendingUp size={64} className="text-orange-500 opacity-20" />
+								<p className="text-xs font-mono uppercase tracking-[0.3em] text-orange-500/50 mt-4">
+									BuildRail Engineered Site
+								</p>
 							</div>
 						</div>
 
-						<div className="p-8 border-t border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950">
-							<p className="text-orange-500/70 font-medium mb-1">
-								Customer Perception:
-							</p>
-							<p className="text-xl text-white font-semibold">
-								&ldquo;This is the expert. Price is secondary.&rdquo;
-							</p>
+						<div className="p-8 space-y-4 bg-gradient-to-br from-zinc-900 to-zinc-950">
+							<div className="flex items-start gap-3">
+								<CheckCircle2 size={18} className="text-orange-500 mt-1" />
+								<p className="text-white font-bold italic leading-snug">
+									&ldquo;This is the expert. I don&quot;t care if they are the
+									most expensive, I want it done right.&rdquo;
+								</p>
+							</div>
+							<div className="pt-4 border-t border-zinc-800 flex justify-between items-center">
+								<span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
+									Average Project Value
+								</span>
+								<span className="text-xl font-black text-white tracking-tight">
+									$25,000 - $75,000+
+								</span>
+							</div>
 						</div>
 					</motion.div>
 				</div>
 
-				{/* The Closer */}
-				<motion.div
-					variants={itemVariants}
-					className="text-center mt-12 py-8 border-t border-zinc-900"
-				>
-					<p className="text-2xl md:text-3xl text-zinc-300 font-medium tracking-tight">
-						Same contractor.{' '}
-						<span className="text-zinc-500 italic">Different perception.</span>
-						<br />
-						<span className="inline-block mt-4 px-6 py-2 bg-orange-500/10 text-orange-400 font-black rounded-xl border border-orange-500/20">
-							DIFFERENT PRICING POWER.
-						</span>
-					</p>
+				{/* The Perception Punchline */}
+				<motion.div variants={itemVariants} className="mt-20 text-center">
+					<div className="inline-flex flex-col md:flex-row items-center gap-4 bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800">
+						<div className="px-4 py-2 bg-orange-500/10 text-orange-500 text-sm font-black uppercase tracking-tighter rounded-lg border border-orange-500/20">
+							The BuildRail Strategy
+						</div>
+						<p className="text-lg md:text-xl text-zinc-300 font-medium">
+							We make you look like the{' '}
+							<span className="text-white font-bold">only logical choice</span>{' '}
+							in your market.
+						</p>
+					</div>
 				</motion.div>
 			</motion.div>
 		</section>

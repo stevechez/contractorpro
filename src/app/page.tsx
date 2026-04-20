@@ -8,11 +8,13 @@ import BeforeAndAfter from '@/components/sections/BeforeAndAfter';
 import ProcessTimeline from '@/components/sections/ProcessTimeline';
 import { Pricing } from '@/components/sections/Pricing';
 import { CTA } from '@/components/sections/CTA';
+import PerceptionGap from '@/components/PerceptionGap';
 
 export default function BuildRailSitesPage() {
 	return (
 		<div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans selection:bg-orange-500/30 pb-24 md:pb-0">
 			<Hero />
+			<PerceptionGap />
 			<TrustedBy />
 			<PainSection />
 			<OfferSection />
