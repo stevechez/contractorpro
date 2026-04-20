@@ -5,6 +5,7 @@ import PainSection from '@/components/sections/PainSection';
 import OfferSection from '@/components/sections/OfferSection';
 import FeaturesGrid from '@/components/sections/FeaturesGrid';
 import BeforeAndAfter from '@/components/sections/BeforeAndAfter';
+import PriceJustification from '@/components/PriceJustification';
 import ProcessTimeline from '@/components/sections/ProcessTimeline';
 import { Pricing } from '@/components/sections/Pricing';
 import { CTA } from '@/components/sections/CTA';
@@ -19,6 +20,7 @@ export default function BuildRailSitesPage() {
 			<PainSection />
 			<OfferSection />
 			<FeaturesGrid />
+			<PriceJustification />
 			<BeforeAndAfter />
 			<ProcessTimeline />
 			<Pricing />

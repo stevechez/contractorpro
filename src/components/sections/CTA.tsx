@@ -1,50 +1,105 @@
-// components/sections/CTA.tsx
 'use client';
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { motion, Variants } from 'framer-motion';
+import { ArrowRight, ShieldCheck, Zap, Lock } from 'lucide-react';
 
-export function CTA() {
+export default function CTA() {
+	const itemVariants: Variants = {
+		hidden: { opacity: 0, y: 20 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+		},
+	};
+
 	return (
-		<section className="relative py-24 overflow-hidden bg-accent text-white">
-			{/* Decorative background blurs to add depth to the solid color */}
-			<div className="absolute -top-24 -right-24 w-96 h-96 bg-white/20 blur-[100px] rounded-full pointer-events-none" />
-			<div className="absolute -bottom-24 -left-24 w-96 h-96 bg-black/20 blur-[100px] rounded-full pointer-events-none" />
+		<section className="relative py-32 px-6 bg-zinc-950 overflow-hidden">
+			{/* Intense orange glow behind the card */}
+			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-			<div className="container mx-auto px-6 relative z-10 text-center">
-				<motion.div
-					initial={{ opacity: 0, scale: 0.95 }}
-					whileInView={{ opacity: 1, scale: 1 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5, ease: 'easeOut' }}
-					className="max-w-3xl mx-auto"
+			<motion.div
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true }}
+				transition={{ staggerChildren: 0.1 }}
+				className="relative z-10 max-w-5xl mx-auto"
+			>
+				<div className="bg-zinc-900 border border-zinc-800 rounded-[3rem] p-8 md:p-20 text-center shadow-2xl overflow-hidden relative">
+					{/* Subtle Industrial Grid Background */}
+					<div
+						className="absolute inset-0 opacity-[0.03] pointer-events-none"
+						style={{
+							backgroundImage: `radial-gradient(circle, #fff 1px, transparent 1px)`,
+							backgroundSize: '40px 40px',
+						}}
+					/>
+
+					<motion.div variants={itemVariants} className="mb-8">
+						<span className="px-5 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-xs font-black uppercase tracking-[0.3em] text-orange-500">
+							Limited Availability
+						</span>
+					</motion.div>
+
+					<motion.h2
+						variants={itemVariants}
+						className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.9] uppercase mb-8"
+					>
+						STOP LOSING JOBS TO <br />
+						<span className="text-zinc-700">AVERAGE COMPETITORS</span>
+					</motion.h2>
+
+					<motion.p
+						variants={itemVariants}
+						className="text-xl text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed"
+					>
+						We are only accepting{' '}
+						<span className="text-white font-bold">3 new builds this week</span>{' '}
+						to ensure every site hits our 48-hour &ldquot;Authority
+						Standard.&rdquot; Secure your slot before your local competitor
+						does.
+					</motion.p>
+
+					<motion.div
+						variants={itemVariants}
+						className="flex flex-col items-center gap-6"
+					>
+						<button className="group relative w-full md:w-auto h-20 px-12 bg-orange-500 hover:bg-orange-600 text-white font-black rounded-2xl transition-all shadow-[0_0_50px_rgba(249,115,22,0.3)] text-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
+							UPGRADE MY BUSINESS NOW
+							<ArrowRight
+								size={24}
+								className="group-hover:translate-x-1 transition-transform"
+							/>
+						</button>
+
+						<div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mt-4">
+							<div className="flex items-center gap-2 text-zinc-500 text-sm font-bold uppercase tracking-widest">
+								<ShieldCheck size={18} className="text-orange-500" />
+								48-Hour Guarantee
+							</div>
+							<div className="flex items-center gap-2 text-zinc-500 text-sm font-bold uppercase tracking-widest">
+								<Lock size={18} className="text-orange-500" />
+								Secure Checkout
+							</div>
+							<div className="flex items-center gap-2 text-zinc-500 text-sm font-bold uppercase tracking-widest">
+								<Zap size={18} className="text-orange-500 fill-orange-500" />
+								Instant Access
+							</div>
+						</div>
+					</motion.div>
+				</div>
+
+				{/* Final Risk Reversal "Micro-Copy" */}
+				<motion.p
+					variants={itemVariants}
+					className="mt-12 text-center text-zinc-600 text-sm font-medium italic"
 				>
-					<h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-						Ready to build a better online presence?
-					</h2>
-
-					<p className="text-xl text-blue-100 mb-10 leading-relaxed">
-						Stop losing high-ticket jobs to competitors with better websites.
-						Let&quot;s launch your premium, conversion-optimized site in the
-						next 48 hours.
-					</p>
-
-					<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-						<Link
-							href="/intake"
-							className="w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-lg font-bold text-accent shadow-xl hover:bg-slate-100 hover:-translate-y-1 transition-all"
-						>
-							Start My Website
-						</Link>
-						<Link
-							href="#pricing"
-							className="w-full sm:w-auto rounded-xl border-2 border-white/30 bg-transparent px-8 py-4 text-lg font-bold text-white hover:bg-white/10 transition-all"
-						>
-							Review Pricing
-						</Link>
-					</div>
-				</motion.div>
-			</div>
+					By clicking above, you are initiating a 48-hour high-velocity build.{' '}
+					<br />
+					If we don&quot;t deliver your live site in exactly 48 hours, you pay
+					nothing. No fine print.
+				</motion.p>
+			</motion.div>
 		</section>
 	);
 }

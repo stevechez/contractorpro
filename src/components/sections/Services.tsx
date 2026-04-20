@@ -1,138 +1,121 @@
-// components/sections/ServicesGrid.tsx
-"use client";
+'use client';
 
-import { motion, Variants } from "framer-motion";
-import { Home, Bath, ChefHat, Hammer, Paintbrush, Wrench, TreePine, ArrowUpRight } from "lucide-react";
+import React from 'react';
+import { motion, Variants } from 'framer-motion';
+import { ServiceItem } from '@/lib/nicheData';
+import {
+	Home,
+	Bath,
+	Utensils,
+	Hammer,
+	Paintbrush,
+	TreePine,
+	Wrench,
+} from 'lucide-react';
 
-// 1. Map string keys to Lucide components
-const iconMap: Record<string, React.ElementType> = {
-  home: Home,
-  bath: Bath,
-  kitchen: ChefHat,
-  hammer: Hammer,
-  paint: Paintbrush,
-  wrench: Wrench,
-  tree: TreePine,
+// Use React.ReactElement to satisfy strict TypeScript rules in Next.js 15+
+const IconMapper = ({ name }: { name: string }) => {
+	const icons: Record<string, React.ReactElement> = {
+		home: <Home size={32} />,
+		bath: <Bath size={32} />,
+		kitchen: <Utensils size={32} />,
+		hammer: <Hammer size={32} />,
+		paint: <Paintbrush size={32} />,
+		tree: <TreePine size={32} />,
+		wrench: <Wrench size={32} />,
+	};
+	return icons[name] || <Hammer size={32} />;
 };
 
-export interface ServiceItem {
-  title: string;
-  description: string;
-  iconName: string;
-}
+export function Services({ services }: { services: ServiceItem[] }) {
+	const containerVariants: Variants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+		},
+	};
 
-interface ServicesGridProps {
-  services?: ServiceItem[];
-}
+	const itemVariants: Variants = {
+		hidden: { opacity: 0, y: 30 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+		},
+	};
 
-const defaultServices: ServiceItem[] = [
-  { title: "Custom Home Builds", description: "We build dream homes from the ground up with uncompromising quality and architectural precision.", iconName: "home" },
-  { title: "Bathroom Remodels", description: "Custom tile work to high-end plumbing fixtures.", iconName: "bath" },
-  { title: "Kitchen Renovations", description: "Custom cabinetry and professional-grade appliances.", iconName: "kitchen" },
-  { title: "Commercial Build-Outs", description: "Fast, reliable commercial tenant improvements that get your doors open on time and perfectly to spec.", iconName: "hammer" },
-];
+	return (
+		<section className="py-32 px-6 bg-zinc-950 overflow-hidden" id="services">
+			<div className="max-w-7xl mx-auto">
+				<motion.div
+					initial="hidden"
+					whileInView="visible"
+					viewport={{ once: true, margin: '-100px' }}
+					variants={containerVariants}
+					className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-900 border border-zinc-900 rounded-[2rem] overflow-hidden shadow-2xl"
+				>
+					{/* Section Brand Card */}
+					<motion.div
+						variants={itemVariants}
+						className="md:col-span-2 lg:col-span-1 p-12 bg-zinc-950 flex flex-col justify-between relative overflow-hidden group"
+					>
+						<div className="relative z-10">
+							<h2 className="text-sm font-black text-orange-500 uppercase tracking-[0.3em] mb-6">
+								The Deliverables
+							</h2>
+							<h3 className="text-4xl md:text-5xl font-black text-white tracking-tight uppercase leading-[0.9] mb-8">
+								The <br /> Contractor <br />{' '}
+								<span className="text-zinc-800 group-hover:text-zinc-700 transition-colors">
+									Growth System
+								</span>
+							</h3>
+						</div>
 
-// 2. High-end Spring Animations
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { staggerChildren: 0.15 } 
-  },
-};
+						<div className="relative z-10 pt-8 border-t border-zinc-900">
+							<p className="text-zinc-500 font-medium italic leading-relaxed">
+								&ldquo;We don&apos;t just build pages. We build authority assets
+								engineered to win high-ticket jobs.&rdquo;
+							</p>
+						</div>
 
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95, filter: "blur(10px)" },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    filter: "blur(0px)",
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
-  },
-};
+						{/* Industrial background element */}
+						<div className="absolute -bottom-10 -right-10 opacity-[0.02] pointer-events-none">
+							<Hammer size={300} strokeWidth={1} />
+						</div>
+					</motion.div>
 
-export function Services({ services = defaultServices }: ServicesGridProps) {
-  return (
-<section id="services" className="relative bg-slate-50 dark:bg-slate-950 py-32 overflow-hidden">      
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-blue-500/5 blur-[150px] rounded-full pointer-events-none" />
+					{/* Dynamic Service Cards */}
+					{services.map((service, i) => (
+						<motion.div
+							key={i}
+							variants={itemVariants}
+							className="p-12 bg-zinc-950 hover:bg-zinc-900/40 transition-all duration-500 group relative flex flex-col"
+						>
+							<div className="mb-10 text-zinc-800 group-hover:text-orange-500 transition-colors duration-500 transform group-hover:scale-110 origin-left">
+								<IconMapper name={service.iconName} />
+							</div>
 
-      <div className="container relative z-10 mx-auto px-6">
-        <div className="max-w-3xl mb-20">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl font-extrabold tracking-tighter text-slate-900 dark:text-white"
-          >
-            Capabilities that scale with your vision.
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 text-xl text-slate-600 dark:text-slate-400 font-light leading-relaxed max-w-2xl"
-          >
-            We don't just build websites. We engineer high-performance digital assets designed to convert traffic into high-ticket jobs.
-          </motion.p>
-        </div>
+							<div className="flex-grow">
+								<h4 className="text-2xl font-bold text-white mb-4 tracking-tight uppercase group-hover:text-orange-50 transition-colors">
+									{service.title}
+								</h4>
+								<p className="text-zinc-500 group-hover:text-zinc-400 leading-relaxed transition-colors">
+									{service.description}
+								</p>
+							</div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          // 3. The Bento Grid CSS
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(250px,auto)]"
-        >
-          {services.map((service, index) => {
-            const Icon = iconMap[service.iconName] || Hammer; 
-            
-            // Bento Box sizing logic based on index
-            // Item 0 & 3 span 2 columns, Item 1 & 2 span 1 column. 
-            // This creates the asymmetrical mosaic look.
-            const isWide = index === 0 || index === 3;
-            
-            return (
-              <motion.div
-                key={service.title}
-                variants={cardVariants}
-                className={`group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 p-8 md:p-10 shadow-sm backdrop-blur-md transition-all hover:shadow-xl hover:border-accent/40 ${
-                  isWide ? "md:col-span-2" : "md:col-span-1"
-                }`}
-              >
-                {/* 4. The Hover Inner Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                
-                <div className="relative z-10 h-full flex flex-col">
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 transition-transform duration-500 group-hover:scale-110 group-hover:bg-accent group-hover:text-white group-hover:border-accent">
-                      <Icon className="h-7 w-7" />
-                    </div>
-                    
-                    {/* Tiny detail: Arrow appears and slides in on hover to imply action */}
-                    <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center opacity-0 -translate-y-2 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0">
-                       <ArrowUpRight className="w-5 h-5 text-accent" />
-                    </div>
-                  </div>
-
-                  <div className="mt-auto">
-                    <h3 className="mb-3 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-light">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
-    </section>
-  );
+							{/* Technical Indicator */}
+							<div className="mt-12 flex items-end justify-between">
+								<div className="text-6xl font-black text-zinc-900/50 group-hover:text-orange-500/5 transition-colors pointer-events-none">
+									0{i + 1}
+								</div>
+								<div className="w-10 h-px bg-zinc-900 group-hover:bg-orange-500/20 transition-colors" />
+							</div>
+						</motion.div>
+					))}
+				</motion.div>
+			</div>
+		</section>
+	);
 }
