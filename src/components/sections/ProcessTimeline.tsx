@@ -1,137 +1,125 @@
-// components/sections/ProcessTimeline.tsx
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ClipboardEdit, Code2, Rocket } from "lucide-react";
+import { motion, Variants } from 'framer-motion';
+import { UploadCloud, PenTool, Rocket } from 'lucide-react';
 
-const steps = [
-  {
-    id: "01",
-    title: "Apply & Align",
-    description: "Fill out our streamlined 2-minute intake form. We review your project to ensure we are a perfect fit, then send over a secure checkout link. No endless discovery calls or aggressive sales pitches.",
-    icon: ClipboardEdit,
-  },
-  {
-    id: "02",
-    title: "The 48-Hour Build",
-    description: "Once the flat fee is processed, our engineering team gets to work. We craft your custom digital asset, write the high-converting copy, and optimize the UI for your specific trade.",
-    icon: Code2,
-  },
-  {
-    id: "03",
-    title: "Launch & Handover",
-    description: "Your site goes live on a lightning-fast global edge network. We configure your local SEO, verify your lead-capture database, and hand over the keys to your new revenue engine.",
-    icon: Rocket,
-  },
-];
+export default function ProcessTimeline() {
+	const containerVariants: Variants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: { staggerChildren: 0.2 },
+		},
+	};
 
-export function ProcessTimeline() {
-  const containerRef = useRef<HTMLDivElement>(null);
+	const itemVariants: Variants = {
+		hidden: { opacity: 0, y: 30 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+		},
+	};
 
-  // Track the scroll progress of this specific section
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
+	const steps = [
+		{
+			num: '01',
+			title: 'Submit Your Info',
+			desc: 'Upload photos, your logo, and basic business details.',
+			time: '10 Minutes',
+			icon: <UploadCloud size={24} className="text-orange-500" />,
+		},
+		{
+			num: '02',
+			title: 'We Build Everything',
+			desc: 'We map out the local SEO, structure the copy, and build the site.',
+			time: '24–36 Hours',
+			icon: <PenTool size={24} className="text-orange-500" />,
+		},
+		{
+			num: '03',
+			title: 'Launch & Profit',
+			desc: 'Your premium site goes live and starts capturing high-end leads.',
+			time: 'Hour 48',
+			icon: <Rocket size={24} className="text-orange-500" />,
+		},
+	];
 
-  // Map the scroll progress (0 to 1) to a CSS percentage string (0% to 100%)
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+	return (
+		<section className="relative py-32 px-6 bg-zinc-950 border-t border-zinc-900 overflow-hidden">
+			{/* Background ambient glow */}
+			<div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-  return (
-    <section id="process" className="relative bg-slate-950 py-32 overflow-hidden">
-      
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/5 blur-[150px] rounded-full pointer-events-none" />
+			<motion.div
+				className="relative z-10 max-w-6xl mx-auto"
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true, margin: '-100px' }}
+				variants={containerVariants}
+			>
+				<motion.div variants={itemVariants} className="text-center mb-24">
+					<h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
+						The 48-Hour{' '}
+						<span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
+							Sprint
+						</span>
+					</h2>
+					<p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+						From the moment you submit your photos, the clock starts. Here is
+						exactly how we go from start to live.
+					</p>
+				</motion.div>
 
-      <div className="container relative z-10 mx-auto px-6 max-w-5xl">
-        
-        <div className="text-center mb-20">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-6"
-          >
-            How it works.
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xl text-slate-400 font-light max-w-2xl mx-auto"
-          >
-            A frictionless, transparent process designed to get your business online and generating leads in days, not months.
-          </motion.p>
-        </div>
+				<div className="relative">
+					{/* DESKTOP Connecting Line Track */}
+					<div className="hidden md:block absolute top-[3.25rem] left-[10%] right-[10%] h-1 bg-zinc-900 rounded-full z-0 overflow-hidden">
+						<motion.div
+							initial={{ x: '-100%' }}
+							whileInView={{ x: '100%' }}
+							viewport={{ once: true }}
+							transition={{ duration: 2.5, ease: 'easeInOut', delay: 0.5 }}
+							className="w-full h-full bg-gradient-to-r from-transparent via-orange-500 to-transparent"
+						/>
+					</div>
 
-        <div className="relative" ref={containerRef}>
-          
-          {/* The Static Background Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
-          
-          {/* The Animated Glowing Line */}
-          <motion.div 
-            className="absolute left-8 md:left-1/2 top-0 w-1 bg-gradient-to-b from-blue-500 to-accent -translate-x-1/2 origin-top shadow-[0_0_15px_rgba(37,99,235,0.5)]"
-            style={{ height: lineHeight }}
-          />
+					{/* MOBILE Connecting Line Track */}
+					<div className="block md:hidden absolute top-[10%] bottom-[10%] left-[2.25rem] w-1 bg-zinc-900 rounded-full z-0" />
 
-          <div className="space-y-24 relative z-10">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              // Alternate sides on desktop, keep left on mobile
-              const isEven = index % 2 === 0;
+					<div className="flex flex-col md:flex-row gap-12 md:gap-6 justify-between relative z-10">
+						{steps.map((step, i) => (
+							<motion.div
+								key={i}
+								variants={itemVariants}
+								className="flex flex-row md:flex-col items-start md:items-center text-left md:text-center flex-1 group"
+							>
+								{/* Node / Icon Container */}
+								<div className="relative w-20 h-20 md:w-28 md:h-28 shrink-0 flex items-center justify-center mb-0 md:mb-8 mr-6 md:mr-0">
+									<div className="absolute inset-0 bg-orange-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+									<div className="relative w-16 h-16 md:w-24 md:h-24 bg-zinc-900/80 backdrop-blur-md border-2 border-zinc-800 group-hover:border-orange-500/50 rounded-3xl flex items-center justify-center flex-col gap-1 transition-colors duration-300 shadow-2xl">
+										{step.icon}
+										<span className="text-xs font-bold text-zinc-600 group-hover:text-orange-500/50 transition-colors">
+											{step.num}
+										</span>
+									</div>
+								</div>
 
-              return (
-                <div key={step.id} className="relative flex items-center md:justify-between flex-col md:flex-row gap-8 md:gap-0 group">
-                  
-                  {/* Left spacer for odd rows (Desktop) */}
-                  {!isEven && <div className="hidden md:block md:w-5/12" />}
-
-                  {/* The Center Icon Node */}
-                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 flex items-center justify-center">
-                    <motion.div 
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                      className="w-16 h-16 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center relative z-20 group-hover:border-accent transition-colors duration-500 shadow-xl"
-                    >
-                      <div className="absolute inset-0 bg-accent/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <Icon className="w-6 h-6 text-slate-400 group-hover:text-white relative z-10 transition-colors duration-500" />
-                    </motion.div>
-                  </div>
-
-                  {/* Content Card */}
-                  <motion.div 
-                    initial={{ opacity: 0, x: isEven ? -30 : 30, filter: "blur(10px)" }}
-                    whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className={`w-full md:w-5/12 pl-24 md:pl-0 ${isEven ? 'md:text-right md:pr-16' : 'md:text-left md:pl-16'}`}
-                  >
-                    <span className="text-accent font-mono text-sm font-bold tracking-widest mb-3 block">
-                      STEP {step.id}
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-4">
-                      {step.title}
-                    </h3>
-                    <p className="text-slate-400 leading-relaxed font-light text-lg">
-                      {step.description}
-                    </p>
-                  </motion.div>
-
-                  {/* Right spacer for even rows (Desktop) */}
-                  {isEven && <div className="hidden md:block md:w-5/12" />}
-                  
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+								{/* Content Container */}
+								<div className="flex-1 mt-1 md:mt-0">
+									<div className="inline-flex items-center justify-center px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-md text-sm font-bold text-orange-400 uppercase tracking-widest mb-4">
+										{step.time}
+									</div>
+									<h3 className="text-2xl font-bold text-white mb-3 tracking-tight">
+										{step.title}
+									</h3>
+									<p className="text-lg text-zinc-400 leading-relaxed max-w-sm mx-auto md:mx-0">
+										{step.desc}
+									</p>
+								</div>
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</motion.div>
+		</section>
+	);
 }
